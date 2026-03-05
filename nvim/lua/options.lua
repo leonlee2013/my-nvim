@@ -1,0 +1,30 @@
+local opt = vim.opt
+
+opt.history = 500
+opt.number = true
+opt.tabstop = 2
+opt.shiftwidth = 2
+opt.expandtab = true
+opt.smartindent = true
+opt.laststatus = 2
+opt.hlsearch = true
+opt.incsearch = true
+opt.ignorecase = true
+opt.smartcase = true
+opt.autowrite = true
+opt.autoread = true
+opt.termguicolors = true
+opt.signcolumn = "yes"
+opt.cursorline = true
+opt.scrolloff = 8
+opt.sidescrolloff = 8
+opt.splitright = true
+opt.splitbelow = true
+opt.undofile = true
+opt.updatetime = 250
+opt.timeoutlen = 300
+opt.completeopt = "menu,menuone,noselect"
+opt.clipboard = "unnamedplus"
+opt.visualbell = true
+opt.wildmenu = true
+opt.path:append("**/src/**/")
