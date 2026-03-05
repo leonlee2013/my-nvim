@@ -4,7 +4,6 @@ return {
   -- ====================================================
   {
     "nvim-telescope/telescope.nvim",
-    branch = "0.1.x",
     dependencies = {
       "nvim-lua/plenary.nvim",
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
@@ -98,7 +97,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function()
-      require("nvim-treesitter.configs").setup({
+      require("nvim-treesitter").setup({
         ensure_installed = {
           "go", "gomod", "gosum",
           "lua", "vim", "vimdoc",
@@ -108,14 +107,13 @@ return {
           "markdown", "markdown_inline",
           "proto",
         },
-        highlight = { enable = true },
-        indent = { enable = true },
       })
     end,
   },
 
   -- ====================================================
   -- LSP 语言服务 (替代 vim-lsp + vim-lsp-settings + YCM)
+  -- 使用 Neovim 0.11+ 原生 vim.lsp.config API
   -- ====================================================
   { "williamboman/mason.nvim", config = true },
   {
@@ -131,9 +129,6 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = { "mason.nvim", "mason-lspconfig.nvim", "hrsh7th/cmp-nvim-lsp" },
     config = function()
-      local lspconfig = require("lspconfig")
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(ev)
           local m = function(mode, lhs, rhs, desc)
@@ -160,32 +155,32 @@ return {
         end,
       })
 
-      local servers = {
-        gopls = {
-          settings = {
-            gopls = {
-              analyses = { unusedparams = true },
-              staticcheck = true,
-              gofumpt = true,
-            },
-          },
-        },
-        lua_ls = {
-          settings = {
-            Lua = {
-              workspace = { checkThirdParty = false },
-              telemetry = { enable = false },
-            },
-          },
-        },
-        clangd = {},
-        pyright = {},
-      }
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-      for server, opts in pairs(servers) do
-        opts.capabilities = capabilities
-        lspconfig[server].setup(opts)
-      end
+      vim.lsp.config("*", {
+        capabilities = capabilities,
+      })
+
+      vim.lsp.config("gopls", {
+        settings = {
+          gopls = {
+            analyses = { unusedparams = true },
+            staticcheck = true,
+            gofumpt = true,
+          },
+        },
+      })
+
+      vim.lsp.config("lua_ls", {
+        settings = {
+          Lua = {
+            workspace = { checkThirdParty = false },
+            telemetry = { enable = false },
+          },
+        },
+      })
+
+      vim.lsp.enable({ "gopls", "lua_ls", "clangd", "pyright" })
     end,
   },
 
@@ -343,15 +338,20 @@ return {
   },
 
   -- ====================================================
-  -- 颜色主题 (替代 molokai / jellybeans / elflord)
+  -- 颜色主题
+  -- 切换: :colorscheme <name>
+  -- 可选: tokyonight / gruvbox / monokai / jellybeans / oh-lucy
   -- ====================================================
   {
-    "folke/tokyonight.nvim",
+    "tanvirtin/monokai.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme("tokyonight")
+      vim.cmd.colorscheme("monokai")
     end,
   },
+  { "folke/tokyonight.nvim", lazy = true },
   { "ellisonleao/gruvbox.nvim", lazy = true },
+  { "wtfox/jellybeans.nvim", lazy = true },
+  { "yazeed1s/oh-lucy.nvim", lazy = true },
 }

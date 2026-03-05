@@ -94,9 +94,17 @@ nvim                # 首次启动自动安装所有插件
 | 插件 | 替代 | 说明 |
 |:-----|:-----|:-----|
 | [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) | 手动 statusline | 状态栏 |
-| [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) | molokai / jellybeans | 颜色主题 (默认) |
-| [gruvbox.nvim](https://github.com/ellisonleao/gruvbox.nvim) | gruvbox | 颜色主题 (备选) |
 | [which-key.nvim](https://github.com/folke/which-key.nvim) | *新增* | 按键后弹出快捷键提示 |
+
+### 颜色主题
+
+| 插件 | 替代 | 说明 |
+|:-----|:-----|:-----|
+| [monokai.nvim](https://github.com/tanvirtin/monokai.nvim) | molokai | **默认主题**，经典 Monokai 风格 |
+| [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) | - | 现代深色主题 |
+| [gruvbox.nvim](https://github.com/ellisonleao/gruvbox.nvim) | gruvbox | 复古暖色调 |
+| [jellybeans.nvim](https://github.com/wtfox/jellybeans.nvim) | jellybeans.vim | 柔和对比度深色主题 |
+| [oh-lucy.nvim](https://github.com/yazeed1s/oh-lucy.nvim) | lucius | 柔和中性主题 |
 
 ---
 
@@ -174,10 +182,14 @@ nvim/
 
 ## 切换主题
 
-默认主题为 **tokyonight**，如需切换：
+默认主题为 **monokai**，可用 `:colorscheme` 临时切换：
 
 ```vim
+:colorscheme tokyonight
 :colorscheme gruvbox
+:colorscheme jellybeans
+:colorscheme oh-lucy
+:colorscheme monokai
 ```
 
-或修改 `nvim/lua/plugins.lua` 中 tokyonight 配置块的 `vim.cmd.colorscheme(...)` 即可持久生效。
+持久修改：编辑 `nvim/lua/plugins.lua` 底部主题配置块，将 `vim.cmd.colorscheme("monokai")` 改为目标主题名。
