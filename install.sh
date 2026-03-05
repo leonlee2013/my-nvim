@@ -85,7 +85,6 @@ fi
 echo "[4/5] 处理现有配置..."
 CurrentDate=$(date +"%Y-%m-%d_%H-%M-%S")
 NvimConfigPath="$HOME/.config/nvim"
-NvimDataPath="$HOME/.local/share/nvim"
 
 if [ -d "$NvimConfigPath" ]; then
   echo "  备份现有配置到: ${NvimConfigPath}_${CurrentDate}"
