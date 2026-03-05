@@ -99,7 +99,7 @@ return {
     config = function()
       require("nvim-treesitter").setup({
         ensure_installed = {
-          "go", "gomod", "gosum",
+          "go", "gomod", "gosum", "gowork",
           "lua", "vim", "vimdoc",
           "c", "cpp",
           "python",
@@ -206,9 +206,23 @@ return {
       vim.lsp.config("gopls", {
         settings = {
           gopls = {
-            analyses = { unusedparams = true },
+            semanticTokens = true,
+            analyses = {
+              unusedparams = true,
+              unusedwrite = true,
+              useany = true,
+              nilness = true,
+            },
             staticcheck = true,
             gofumpt = true,
+            hints = {
+              assignVariableTypes = true,
+              compositeLiteralFields = true,
+              constantValues = true,
+              functionTypeParameters = true,
+              parameterNames = true,
+              rangeVariableTypes = true,
+            },
           },
         },
       })
@@ -392,6 +406,15 @@ return {
     config = function()
       require("catppuccin").setup({
         flavour = "mocha",
+        custom_highlights = function(colors)
+          return {
+            ["@lsp.type.namespace.go"] = { fg = colors.yellow },
+            ["@lsp.type.interface.go"] = { fg = colors.yellow, style = { "italic" } },
+            ["@lsp.type.typeParameter.go"] = { fg = colors.teal },
+            ["@lsp.type.parameter.go"] = { fg = colors.maroon },
+            ["@lsp.mod.readonly.go"] = { style = { "bold" } },
+          }
+        end,
         integrations = {
           aerial = true,
           avante = true,
