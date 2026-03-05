@@ -4,7 +4,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Neovim-0.9%2B-57A143?style=flat-square&logo=neovim&logoColor=white" />
+  <img src="https://img.shields.io/badge/Neovim-0.10%2B-57A143?style=flat-square&logo=neovim&logoColor=white" />
   <img src="https://img.shields.io/badge/Config-Lua-2C2D72?style=flat-square&logo=lua&logoColor=white" />
   <img src="https://img.shields.io/badge/Plugin_Manager-lazy.nvim-B4A7D6?style=flat-square" />
 </p>
@@ -28,7 +28,7 @@ nvim                # 首次启动自动安装所有插件
 
 | 工具 | 用途 | 安装方式 |
 |:-----|:-----|:---------|
-| **Neovim** >= 0.9 | 编辑器 | 脚本自动安装 |
+| **Neovim** >= 0.10.1 | 编辑器 | 脚本自动安装 |
 | **git** | 插件管理 | `apt install git` |
 | **gcc** + **make** | 编译 telescope-fzf | `apt install build-essential` |
 | **ripgrep** | 全局搜索 | `apt install ripgrep` |
@@ -106,6 +106,16 @@ nvim                # 首次启动自动安装所有插件
 | [todo-comments.nvim](https://github.com/folke/todo-comments.nvim) | TODO / FIXME / NOTE 关键字高亮 |
 | [nvim-colorizer.lua](https://github.com/NvChad/nvim-colorizer.lua) | 颜色代码内联预览 |
 
+### AI 代码助手
+
+| 插件 | 说明 |
+|:-----|:-----|
+| [avante.nvim](https://github.com/yetone/avante.nvim) | AI 驱动的代码助手，类似 Cursor IDE 体验 |
+| [render-markdown.nvim](https://github.com/MeanderingProgrammer/render-markdown.nvim) | Avante 对话面板 Markdown 渲染 |
+| [img-clip.nvim](https://github.com/HakonHarnes/img-clip.nvim) | 支持粘贴图片到 AI 对话 |
+| [dressing.nvim](https://github.com/stevearc/dressing.nvim) | 美化输入框 / 选择框 UI |
+| [nui.nvim](https://github.com/MunifTanjim/nui.nvim) | UI 组件库 (Avante 面板依赖) |
+
 ### 颜色主题
 
 | 插件 | 说明 |
@@ -166,6 +176,34 @@ nvim                # 首次启动自动安装所有插件
 | `,b` | Go Build | `,gR` | Go Run |
 | `,gT` | Go Test | `,gC` | Go Coverage |
 | `,ga` | Go Add Tags | | |
+
+### Avante AI 助手
+
+| 快捷键 | 功能 | 快捷键 | 功能 |
+|:-------|:-----|:-------|:-----|
+| `,aa` | 打开 AI 对话 | `,at` | 切换侧栏显示 |
+| `,ae` | 编辑选中代码 | `,af` | 切换侧栏焦点 |
+| `,ar` | 刷新侧栏 | `,a?` | 选择模型 |
+| `,an` | 新建对话 | `,ah` | 历史对话列表 |
+| `,ac` | 添加当前文件到上下文 | `,aS` | 停止当前请求 |
+| `,a+` | 添加文件 *(NvimTree)* | `,a-` | 移除文件 *(NvimTree)* |
+
+**侧栏内操作：**
+
+| 快捷键 | 功能 | 快捷键 | 功能 |
+|:-------|:-----|:-------|:-----|
+| `A` | 应用所有建议 | `a` | 应用光标处建议 |
+| `r` | 重试请求 | `e` | 编辑请求 |
+| `@` | 添加文件 | `d` | 移除文件 |
+| `Tab` | 切换窗口 | `q` | 关闭侧栏 |
+
+**Diff 冲突处理：**
+
+| 快捷键 | 功能 | 快捷键 | 功能 |
+|:-------|:-----|:-------|:-----|
+| `co` | 保留我的代码 | `ct` | 采用 AI 建议 |
+| `ca` | 全部采用 AI | `cb` | 两者都保留 |
+| `]x` | 下一个冲突 | `[x` | 上一个冲突 |
 
 ### Claude Code
 

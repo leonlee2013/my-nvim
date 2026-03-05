@@ -394,6 +394,7 @@ return {
         flavour = "mocha",
         integrations = {
           aerial = true,
+          avante = true,
           cmp = true,
           gitsigns = true,
           illuminate = { enabled = true },
@@ -401,6 +402,7 @@ return {
           mason = true,
           nvimtree = true,
           rainbow_delimiters = true,
+          render_markdown = true,
           telescope = { enabled = true },
           treesitter = true,
           which_key = true,
@@ -413,4 +415,110 @@ return {
   { "rebelot/kanagawa.nvim", lazy = true },
   { "rose-pine/neovim", name = "rose-pine", lazy = true },
   { "sainnhe/sonokai", lazy = true },
+
+  -- ====================================================
+  -- Avante AI 代码助手
+  -- <leader>aa 打开对话 / <leader>ae 编辑选中代码
+  -- <leader>at 切换侧栏 / <leader>af 切换焦点
+  -- ====================================================
+  {
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    version = false,
+    build = "make",
+    keys = {
+      {
+        "<leader>a+",
+        function()
+          require("avante.extensions.nvim_tree").add_file()
+        end,
+        desc = "Avante: 添加文件",
+        ft = "NvimTree",
+      },
+      {
+        "<leader>a-",
+        function()
+          require("avante.extensions.nvim_tree").remove_file()
+        end,
+        desc = "Avante: 移除文件",
+        ft = "NvimTree",
+      },
+    },
+    opts = {
+      provider = "claude",
+      mode = "agentic",
+      instructions_file = "avante.md",
+      providers = {
+        claude = {
+          endpoint = os.getenv("ANTHROPIC_BASE_URL") or "https://api.anthropic.com",
+          model = os.getenv("ANTHROPIC_DEFAULT_OPUS_MODEL") or "claude-opus-4-6",
+          api_key_name = "ANTHROPIC_AUTH_TOKEN",
+          timeout = 30000,
+          extra_request_body = {
+            temperature = 0.75,
+            max_tokens = 20480,
+          },
+        },
+      },
+      behaviour = {
+        auto_suggestions = false,
+        auto_set_highlight_group = true,
+        auto_set_keymaps = true,
+        auto_apply_diff_after_generation = false,
+        minimize_diff = true,
+        enable_token_counting = true,
+      },
+      input = {
+        provider = "dressing",
+      },
+      selector = {
+        provider = "telescope",
+        exclude_auto_select = { "NvimTree" },
+      },
+      windows = {
+        position = "right",
+        wrap = true,
+        width = 30,
+        sidebar_header = { enabled = true, align = "center", rounded = true },
+        input = { prefix = "> ", height = 8 },
+        edit = { border = "rounded", start_insert = true },
+        ask = {
+          floating = false,
+          start_insert = true,
+          border = "rounded",
+          focus_on_apply = "ours",
+        },
+      },
+    },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      {
+        "stevearc/dressing.nvim",
+        opts = {
+          select = { backend = { "telescope", "builtin" } },
+        },
+      },
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      "nvim-telescope/telescope.nvim",
+      "hrsh7th/nvim-cmp",
+      "nvim-tree/nvim-web-devicons",
+      {
+        "HakonHarnes/img-clip.nvim",
+        event = "VeryLazy",
+        opts = {
+          default = {
+            embed_image_as_base64 = false,
+            prompt_for_file_name = false,
+            drag_and_drop = { insert_mode = true },
+          },
+        },
+      },
+      {
+        "MeanderingProgrammer/render-markdown.nvim",
+        opts = { file_types = { "markdown", "Avante" } },
+        ft = { "markdown", "Avante" },
+      },
+    },
+  },
 }
