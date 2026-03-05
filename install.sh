@@ -58,28 +58,19 @@ if [ -n "$MISSING" ]; then
   echo "  部分插件 (telescope-fzf-native) 需要 gcc 和 make 来编译"
 fi
 
-# 安装 Nerd Font
-echo "[3/5] 检查 Nerd Font..."
-FONT_DIR="$HOME/.local/share/fonts"
-FONT_NAME="JetBrainsMono"
-if fc-list 2>/dev/null | grep -qi "JetBrainsMono Nerd Font"; then
-  echo "  JetBrainsMono Nerd Font: 已安装"
-else
-  echo "  正在下载 JetBrainsMono Nerd Font..."
-  mkdir -p "$FONT_DIR"
-  FONT_URL="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/${FONT_NAME}.tar.xz"
-  if curl -fsSL "$FONT_URL" -o "/tmp/${FONT_NAME}.tar.xz"; then
-    tar -xf "/tmp/${FONT_NAME}.tar.xz" -C "$FONT_DIR"
-    rm -f "/tmp/${FONT_NAME}.tar.xz"
-    if command -v fc-cache &> /dev/null; then
-      fc-cache -f "$FONT_DIR"
-    fi
-    echo "  已安装到: $FONT_DIR"
-    echo "  注意: 请在终端设置中将字体改为 \"JetBrainsMono Nerd Font\""
-  else
-    echo "  下载失败，跳过 (可稍后手动安装: https://www.nerdfonts.com/)"
-  fi
-fi
+# Nerd Font 提示
+echo "[3/5] Nerd Font 提示"
+echo "  nvim-tree、lualine 等插件需要 Nerd Font 才能正确显示图标。"
+echo "  如果通过 SSH 连接，字体需要安装在本地电脑上，而非服务器。"
+echo ""
+echo "  请在本地电脑完成以下两步:"
+echo "    1. 下载安装字体: https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.tar.xz"
+echo "    2. 在终端软件中设置字体为 \"JetBrainsMono Nerd Font\":"
+echo "       - Windows Terminal: 设置 → 配置文件 → 外观 → 字体"
+echo "       - iTerm2: Preferences → Profiles → Text → Font"
+echo "       - Alacritty: ~/.config/alacritty/alacritty.toml → [font.normal] family"
+echo "       - Kitty: ~/.config/kitty/kitty.conf → font_family"
+echo ""
 
 # 备份现有配置
 echo "[4/5] 处理现有配置..."
@@ -110,6 +101,6 @@ echo "  - 所有配置的插件"
 echo "  - Treesitter 语法解析器"
 echo "  - LSP 服务器 (gopls, lua_ls, clangd, pyright)"
 echo ""
-echo "如果图标显示异常，请在终端设置中将字体改为 \"JetBrainsMono Nerd Font\""
+echo "如果图标显示为乱码，请参考上方 [3/5] 的提示在本地安装 Nerd Font"
 echo ""
 echo "运行 nvim 开始使用！"

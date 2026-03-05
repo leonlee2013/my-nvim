@@ -33,7 +33,18 @@ nvim                # 首次启动自动安装所有插件
 | **gcc** + **make** | 编译 telescope-fzf | `apt install build-essential` |
 | **ripgrep** | 全局搜索 | `apt install ripgrep` |
 | **fd** | 文件查找 | `apt install fd-find` |
-| [**Nerd Font**](https://www.nerdfonts.com/) | 图标显示 | 脚本自动安装 JetBrainsMono |
+| [**Nerd Font**](https://www.nerdfonts.com/) | 图标显示 | 需在本地终端安装 (见下方说明) |
+
+> **Nerd Font 安装说明**
+>
+> nvim-tree、lualine 等插件依赖 Nerd Font 显示图标。如果通过 **SSH 远程连接**，字体渲染发生在本地，需要在**本地电脑**上操作：
+>
+> 1. 下载 [JetBrainsMono Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.tar.xz) 并安装到本地系统
+> 2. 在终端软件中将字体设置为 `JetBrainsMono Nerd Font`：
+>    - **Windows Terminal**：设置 → 配置文件 → 外观 → 字体
+>    - **iTerm2**：Preferences → Profiles → Text → Font
+>    - **Alacritty**：`~/.config/alacritty/alacritty.toml` → `[font.normal] family`
+>    - **Kitty**：`~/.config/kitty/kitty.conf` → `font_family`
 
 ---
 
