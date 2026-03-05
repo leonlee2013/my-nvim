@@ -96,15 +96,25 @@ nvim                # 首次启动自动安装所有插件
 | [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) | 手动 statusline | 状态栏 |
 | [which-key.nvim](https://github.com/folke/which-key.nvim) | *新增* | 按键后弹出快捷键提示 |
 
+### 高亮增强
+
+| 插件 | 说明 |
+|:-----|:-----|
+| [vim-illuminate](https://github.com/RRethy/vim-illuminate) | 自动高亮光标下单词的所有出现位置 |
+| [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) | 缩进参考线 + 作用域高亮 |
+| [rainbow-delimiters.nvim](https://github.com/HiPhish/rainbow-delimiters.nvim) | 嵌套括号彩虹着色 |
+| [todo-comments.nvim](https://github.com/folke/todo-comments.nvim) | TODO / FIXME / NOTE 关键字高亮 |
+| [nvim-colorizer.lua](https://github.com/NvChad/nvim-colorizer.lua) | 颜色代码内联预览 |
+
 ### 颜色主题
 
-| 插件 | 替代 | 说明 |
-|:-----|:-----|:-----|
-| [monokai.nvim](https://github.com/tanvirtin/monokai.nvim) | molokai | **默认主题**，经典 Monokai 风格 |
-| [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) | - | 现代深色主题 |
-| [gruvbox.nvim](https://github.com/ellisonleao/gruvbox.nvim) | gruvbox | 复古暖色调 |
-| [jellybeans.nvim](https://github.com/wtfox/jellybeans.nvim) | jellybeans.vim | 柔和对比度深色主题 |
-| [oh-lucy.nvim](https://github.com/yazeed1s/oh-lucy.nvim) | lucius | 柔和中性主题 |
+| 插件 | 说明 |
+|:-----|:-----|
+| [catppuccin](https://github.com/catppuccin/nvim) | **默认主题**，柔和暖色调，全插件适配 |
+| [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) | 现代深色主题，4 种风格 |
+| [kanagawa.nvim](https://github.com/rebelot/kanagawa.nvim) | 日本画风灵感，沉稳古典 |
+| [rose-pine](https://github.com/rose-pine/neovim) | 极简素雅，低对比度护眼 |
+| [sonokai](https://github.com/sainnhe/sonokai) | Monokai 现代升级版，5 种风格 |
 
 ---
 
@@ -182,14 +192,14 @@ nvim/
 
 ## 切换主题
 
-默认主题为 **monokai**，可用 `:colorscheme` 临时切换：
+默认主题为 **catppuccin** (mocha)，可用 `:colorscheme` 临时切换：
 
 ```vim
-:colorscheme tokyonight
-:colorscheme gruvbox
-:colorscheme jellybeans
-:colorscheme oh-lucy
-:colorscheme monokai
+:colorscheme catppuccin       " 柔和暖色 (默认 mocha 口味)
+:colorscheme tokyonight       " 现代深蓝
+:colorscheme kanagawa         " 沉稳古典
+:colorscheme rose-pine        " 素雅清新
+:colorscheme sonokai          " Monokai 升级版
 ```
 
-持久修改：编辑 `nvim/lua/plugins.lua` 底部主题配置块，将 `vim.cmd.colorscheme("monokai")` 改为目标主题名。
+持久修改：编辑 `nvim/lua/plugins.lua` 底部主题配置块，将 `vim.cmd.colorscheme("catppuccin")` 改为目标主题名。

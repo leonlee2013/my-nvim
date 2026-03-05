@@ -34,6 +34,23 @@ autocmd("FileType", {
 autocmd("TextYankPost", {
   group = group,
   callback = function()
-    vim.highlight.on_yank({ higroup = "IncSearch", timeout = 200 })
+    vim.highlight.on_yank({ higroup = "IncSearch", timeout = 300 })
   end,
+})
+
+-- 诊断显示优化
+vim.diagnostic.config({
+  virtual_text = { prefix = "●" },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = " ",
+      [vim.diagnostic.severity.WARN] = " ",
+      [vim.diagnostic.severity.HINT] = "󰌵 ",
+      [vim.diagnostic.severity.INFO] = " ",
+    },
+  },
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+  float = { border = "rounded" },
 })

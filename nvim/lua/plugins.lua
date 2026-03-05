@@ -112,6 +112,48 @@ return {
   },
 
   -- ====================================================
+  -- 高亮增强
+  -- ====================================================
+  {
+    "RRethy/vim-illuminate",
+    config = function()
+      require("illuminate").configure({
+        delay = 200,
+        large_file_cutoff = 2000,
+        filetypes_denylist = { "NvimTree", "aerial", "TelescopePrompt" },
+      })
+    end,
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    config = function()
+      require("ibl").setup({
+        indent = { char = "│" },
+        scope = { enabled = true, show_start = true },
+      })
+    end,
+  },
+  { "HiPhish/rainbow-delimiters.nvim" },
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = true,
+  },
+  {
+    "NvChad/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup({
+        filetypes = { "*" },
+        user_default_options = {
+          css = true,
+          names = false,
+        },
+      })
+    end,
+  },
+
+  -- ====================================================
   -- LSP 语言服务 (替代 vim-lsp + vim-lsp-settings + YCM)
   -- 使用 Neovim 0.11+ 原生 vim.lsp.config API
   -- ====================================================
@@ -277,7 +319,7 @@ return {
         end,
       })
     end,
-    ft = { "go", "gomod" },
+    lazy = false,
     build = ':lua require("go.install").update_all_sync()',
   },
 
@@ -340,18 +382,35 @@ return {
   -- ====================================================
   -- 颜色主题
   -- 切换: :colorscheme <name>
-  -- 可选: tokyonight / gruvbox / monokai / jellybeans / oh-lucy
+  -- 可选: catppuccin / tokyonight / kanagawa / rose-pine / sonokai
   -- ====================================================
   {
-    "tanvirtin/monokai.nvim",
+    "catppuccin/nvim",
+    name = "catppuccin",
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme("monokai")
+      require("catppuccin").setup({
+        flavour = "mocha",
+        integrations = {
+          aerial = true,
+          cmp = true,
+          gitsigns = true,
+          illuminate = { enabled = true },
+          indent_blankline = { enabled = true },
+          mason = true,
+          nvimtree = true,
+          rainbow_delimiters = true,
+          telescope = { enabled = true },
+          treesitter = true,
+          which_key = true,
+        },
+      })
+      vim.cmd.colorscheme("catppuccin")
     end,
   },
   { "folke/tokyonight.nvim", lazy = true },
-  { "ellisonleao/gruvbox.nvim", lazy = true },
-  { "wtfox/jellybeans.nvim", lazy = true },
-  { "yazeed1s/oh-lucy.nvim", lazy = true },
+  { "rebelot/kanagawa.nvim", lazy = true },
+  { "rose-pine/neovim", name = "rose-pine", lazy = true },
+  { "sainnhe/sonokai", lazy = true },
 }
