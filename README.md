@@ -4,7 +4,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Neovim-0.10%2B-57A143?style=flat-square&logo=neovim&logoColor=white" />
+  <img src="https://img.shields.io/badge/Neovim-0.11%2B-57A143?style=flat-square&logo=neovim&logoColor=white" />
   <img src="https://img.shields.io/badge/Config-Lua-2C2D72?style=flat-square&logo=lua&logoColor=white" />
   <img src="https://img.shields.io/badge/Plugin_Manager-lazy.nvim-B4A7D6?style=flat-square" />
 </p>
@@ -28,7 +28,7 @@ nvim                # 首次启动自动安装所有插件
 
 | 工具 | 用途 | 安装方式 |
 |:-----|:-----|:---------|
-| **Neovim** >= 0.10.1 | 编辑器 | 脚本自动安装 |
+| **Neovim** >= 0.11 | 编辑器 | 脚本自动安装 |
 | **git** | 插件管理 | `apt install git` |
 | **gcc** + **make** | 编译 telescope-fzf | `apt install build-essential` |
 | **ripgrep** | 全局搜索 | `apt install ripgrep` |
@@ -86,8 +86,11 @@ nvim                # 首次启动自动安装所有插件
 
 | 插件 | 替代 | 说明 |
 |:-----|:-----|:-----|
-| [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) | vim-lsp + vim-lsp-settings | 语言服务协议 (LSP) |
-| [go.nvim](https://github.com/ray-x/go.nvim) | vim-go | Go 开发工具 |
+| [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) | vim-lsp + vim-lsp-settings | LSP 语言服务，使用 Neovim 0.11+ 原生 API |
+| [go.nvim](https://github.com/ray-x/go.nvim) | vim-go | Go 开发工具 (build/test/coverage/tags) |
+
+> **Go 高亮增强**：gopls 已启用 `semanticTokens`，可区分包名、结构体、接口、方法、参数等不同语义元素的颜色。
+> 配置的 LSP 服务器：`gopls` / `lua_ls` / `clangd` / `pyright`
 
 ### 外观
 
@@ -120,11 +123,11 @@ nvim                # 首次启动自动安装所有插件
 
 | 插件 | 说明 |
 |:-----|:-----|
-| [catppuccin](https://github.com/catppuccin/nvim) | **默认主题**，柔和暖色调，全插件适配 |
+| [onedarkpro.nvim](https://github.com/olimorris/onedarkpro.nvim) | **默认主题** (onedark_vivid)，VS Code One Dark 风格，4 种变体 |
+| [catppuccin](https://github.com/catppuccin/nvim) | 柔和暖色调，全插件适配 |
 | [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) | 现代深色主题，4 种风格 |
-| [kanagawa.nvim](https://github.com/rebelot/kanagawa.nvim) | 日本画风灵感，沉稳古典 |
-| [rose-pine](https://github.com/rose-pine/neovim) | 极简素雅，低对比度护眼 |
-| [sonokai](https://github.com/sainnhe/sonokai) | Monokai 现代升级版，5 种风格 |
+| [vscode.nvim](https://github.com/Mofiqul/vscode.nvim) | VS Code Dark+ 主题移植 |
+| [github-nvim-theme](https://github.com/projekt0n/github-nvim-theme) | GitHub 官方配色，多种变体 |
 
 ---
 
@@ -141,6 +144,15 @@ nvim                # 首次启动自动安装所有插件
 | `,"` | 给单词加引号 | `,xt` | 插入日期时间 *(插入模式)* |
 | `,y` | 复制到系统剪贴板 | `,p` | 从系统剪贴板粘贴 |
 | `,rl` | 重新加载文件 | `F9` | 切换代码大纲 |
+| `,no` | 隐藏行号 | `,nu` | 显示行号 |
+
+### 窗口导航
+
+| 快捷键 | 功能 | 快捷键 | 功能 |
+|:-------|:-----|:-------|:-----|
+| `Ctrl+h` | 切换到左窗口 | `Ctrl+l` | 切换到右窗口 |
+| `Ctrl+j` | 切换到下窗口 | `Ctrl+k` | 切换到上窗口 |
+| `Esc` *(终端模式)* | 退出终端模式 | | |
 
 ### Telescope 查找
 
@@ -230,14 +242,16 @@ nvim/
 
 ## 切换主题
 
-默认主题为 **catppuccin** (mocha)，可用 `:colorscheme` 临时切换：
+默认主题为 **onedark_vivid** (One Dark 高饱和度变体)，可用 `:colorscheme` 临时切换：
 
 ```vim
-:colorscheme catppuccin       " 柔和暖色 (默认 mocha 口味)
+:colorscheme onedark_vivid    " VS Code One Dark 高饱和 (默认)
+:colorscheme onedark          " VS Code One Dark 经典
+:colorscheme onedark_dark     " VS Code One Dark 深色
+:colorscheme catppuccin       " 柔和暖色 (mocha)
 :colorscheme tokyonight       " 现代深蓝
-:colorscheme kanagawa         " 沉稳古典
-:colorscheme rose-pine        " 素雅清新
-:colorscheme sonokai          " Monokai 升级版
+:colorscheme vscode           " VS Code Dark+ 原版
+:colorscheme github_dark      " GitHub 暗色
 ```
 
-持久修改：编辑 `nvim/lua/plugins.lua` 底部主题配置块，将 `vim.cmd.colorscheme("catppuccin")` 改为目标主题名。
+持久修改：编辑 `nvim/lua/plugins.lua` 底部主题配置块，将 `vim.cmd.colorscheme("onedark_vivid")` 改为目标主题名。

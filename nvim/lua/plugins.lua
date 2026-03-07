@@ -215,14 +215,6 @@ return {
             },
             staticcheck = true,
             gofumpt = true,
-            hints = {
-              assignVariableTypes = true,
-              compositeLiteralFields = true,
-              constantValues = true,
-              functionTypeParameters = true,
-              parameterNames = true,
-              rangeVariableTypes = true,
-            },
           },
         },
       })
@@ -396,13 +388,30 @@ return {
   -- ====================================================
   -- 颜色主题
   -- 切换: :colorscheme <name>
-  -- 可选: catppuccin / tokyonight / kanagawa / rose-pine / sonokai
+  -- 可选: onedark_vivid (默认) / onedark / onedark_dark
+  --        catppuccin / tokyonight / vscode / github_dark
   -- ====================================================
+  {
+    "olimorris/onedarkpro.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("onedarkpro").setup({
+        highlights = {
+          ["@lsp.type.namespace.go"] = { fg = "${yellow}" },
+          ["@lsp.type.interface.go"] = { fg = "${yellow}", italic = true },
+          ["@lsp.type.typeParameter.go"] = { fg = "${cyan}" },
+          ["@lsp.type.parameter.go"] = { fg = "${orange}" },
+          ["@lsp.mod.readonly.go"] = { bold = true },
+        },
+      })
+      vim.cmd.colorscheme("onedark_vivid")
+    end,
+  },
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    lazy = false,
-    priority = 1000,
+    lazy = true,
     config = function()
       require("catppuccin").setup({
         flavour = "mocha",
@@ -431,13 +440,11 @@ return {
           which_key = true,
         },
       })
-      vim.cmd.colorscheme("catppuccin")
     end,
   },
   { "folke/tokyonight.nvim", lazy = true },
-  { "rebelot/kanagawa.nvim", lazy = true },
-  { "rose-pine/neovim", name = "rose-pine", lazy = true },
-  { "sainnhe/sonokai", lazy = true },
+  { "Mofiqul/vscode.nvim", lazy = true },
+  { "projekt0n/github-nvim-theme", lazy = true },
 
   -- ====================================================
   -- Avante AI 代码助手
