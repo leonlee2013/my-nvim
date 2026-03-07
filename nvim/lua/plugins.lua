@@ -397,6 +397,11 @@ return {
     priority = 1000,
     config = function()
       require("onedarkpro").setup({
+        colors = {
+          onedark_vivid = {
+            bg = "#171a24",
+          },
+        },
         highlights = {
           ["@lsp.type.namespace.go"] = { fg = "${yellow}" },
           ["@lsp.type.interface.go"] = { fg = "${yellow}", italic = true },
